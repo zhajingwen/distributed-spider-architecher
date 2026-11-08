@@ -1,0 +1,879 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spiders
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spiders
+  template:
+    metadata:
+      labels:
+        app: spiders
+    spec:
+      imagePullSecrets:
+        - name: registry-secret
+      containers:
+        - name: cmc-m
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "cmc.m"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: twitterscan-alert
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "twitterscan.alert"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: twitterscan-insert
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "twitterscan.insert"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: nswap-list
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "nswap.list"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: nswap-raffles
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "nswap.raffles"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: nswap-detail
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "nswap.detail"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mainex-ccxt
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mainex.ccxt"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mainex-coinlist
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mainex.coinlist"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: ethbtc-volume
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "ethbtc_volume.run"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: kol-insight
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "kol_insight.run"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mongrel-dog-list
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mongrel_dog.list"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mongrel-dog-detail
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mongrel_dog.detail"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mongrel-dog-deldata
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mongrel_dog.deldata"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: bestinslot
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "bestinslot.run"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: opensea-list
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "opensea.list"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: opensea-pending
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "opensea.pending"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: opensea-detail
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "opensea.detail"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mintfun-list
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mintfun.list"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mintfun-detail
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mintfun.detail"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: galxe
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "scrapy.galxe"
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: bkearlyproject-ipmonitor
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "BK_early_project.ipmonitor"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: bkearlyproject-gencookies
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "BK_early_project.gencookies"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: bkearlyproject-run
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "BK_early_project.run"
+          ports:
+            - containerPort: 84
+
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: dappradar
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "dappradar_daily.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: similarweb
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "similarweb.run"
+          ports:
+            - containerPort: 88
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mongrel-dog-user_a
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mongrel_dog_user_a.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: project-review
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "project_review.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: googletrends
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "googletrends_api.oldapi"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: mainex-newcoinalert
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mainex.newcoinalert"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: crypto-hot-category
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "scrapy.crypto_hot_category"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: hotcategory-scancoins
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "scrapy.scan_high_exchange_rate"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: cmc-strong
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "cmc.strong"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: hotcategory-scancoinstop1000
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "scrapy.scan_high_exchange_rate_top1000"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: hotcategory-top1000-consumeralert
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "scrapy.hot_category_top1000"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "100Mi"
+        - name: bkproject-document
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "bkproject_document.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: coingecko-ipmonitor
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "gen_coingecko_cf_token.ipmonitor"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: coingecko-gencookies
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "gen_coingecko_cf_token.gencookies"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: categories-hot
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "hot_category.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: wallet-balance
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "wallet_balance.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: whales-newcoin
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "pre_market_alert.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: birdeye-gems
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "birdeye.gems"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: btc-gas
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "btc_gas.gas"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: mainex-marketpercent
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mainex_marketpercent.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: bgmarketshare-botrefresh
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mainex_marketpercent_bot.refresh"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: bgmarketshare-botserver
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "mainex_marketpercent_bot.server"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+        - name: input-hub
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "input_hub.server"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+#        - name: monitor-tginsightbot
+#          image: your-registry.example.com/spider:latest
+#          command:
+#            - "python"
+#            - "manage.py"
+#            - "-e"
+#            - "prod"
+#            - "-s"
+#            - "monitor.tginsightbot"
+#          ports:
+#            - containerPort: 83
+#          env:
+#            - name: mainex_logs_spider
+#              value: "stdout"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spiders-service
+  labels:
+    app: spiders
+spec:
+  selector:
+    app: spiders
+  ports:
+    - name: bkearlyproject
+      protocol: TCP
+      port: 84
+      targetPort: 84
+    - name: telegrambot
+      protocol: TCP
+      port: 83
+      targetPort: 83
+    - name: similarweb
+      protocol: TCP
+      port: 88
+      targetPort: 88
+    - name: bkproject-document
+      protocol: TCP
+      port: 89
+      targetPort: 89
+    - name: project-review
+      protocol: TCP
+      port: 90
+      targetPort: 90
+    - name: wallet-balance
+      protocol: TCP
+      port: 91
+      targetPort: 91
+    - name: birdeye-gems
+      protocol: TCP
+      port: 92
+      targetPort: 92
+    - name: gas
+      protocol: TCP
+      port: 93
+      targetPort: 93
+    - name: marketshare-bot
+      protocol: TCP
+      port: 94
+      targetPort: 94
+    - name: input-hub
+      protocol: TCP
+      port: 95
+      targetPort: 95

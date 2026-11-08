@@ -1,0 +1,4 @@
+*.log
+process_error
+test.py
+test/

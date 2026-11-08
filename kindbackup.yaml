@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spiders-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spiders-test
+  template:
+    metadata:
+      labels:
+        app: spiders-test
+    spec:
+      imagePullSecrets:
+        - name: registry-secret
+      containers:
+        - name: tg-message
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "monitor.tgmessage"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spiders-service
+  labels:
+    app: spiders
+spec:
+  type: NodePort
+  selector:
+    app: spiders
+  ports:
+    - name: bkearlyproject
+      protocol: TCP
+      port: 84
+      targetPort: 84
+    - name: telegrambot
+      protocol: TCP
+      port: 83
+      targetPort: 83
+    - name: similarweb
+      protocol: TCP
+      port: 88
+      targetPort: 88
+    - name: tgscan
+      protocol: TCP
+      port: 89
+      targetPort: 89

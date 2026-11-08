@@ -1,0 +1,80 @@
+# Debug
+debug: false
+proxy: ""
+bots:
+  # QQ号  测试的
+  '2078885749':
+    cacheImage: false
+    cacheRecord: false
+    heartbeat:
+      # 是否发送心跳包, 默认为否
+      enable: false
+      # 心跳包发送间隔, 默认为 15000毫秒
+      interval: 15000
+    http:
+      postUrl: "http://127.0.0.1:5003"
+      postMessageFormat: string
+      secret: ""
+    ws_reverse:
+      - enable: false
+        postMessageFormat: string
+        reverseHost: 127.0.0.1
+        reversePort: 8080
+        reversePath: /ws
+        reconnectInterval: 3000
+      - enable: false
+        postMessageFormat: string
+        reverseHost: 127.0.0.1
+        reversePort: 9222
+        reversePath: /ws
+        reconnectInterval: 3000
+  '3273448382':
+    cacheImage: false
+    cacheRecord: false
+    heartbeat:
+      # 是否发送心跳包, 默认为否
+      enable: false
+      # 心跳包发送间隔, 默认为 15000毫秒
+      interval: 15000
+    http:
+      postUrl: "http://127.0.0.1:5003"
+      postMessageFormat: string
+      secret: ""
+    ws_reverse:
+      - enable: false
+        postMessageFormat: string
+        reverseHost: 127.0.0.1
+        reversePort: 8080
+        reversePath: /ws
+        reconnectInterval: 3000
+      - enable: false
+        postMessageFormat: string
+        reverseHost: 127.0.0.1
+        reversePort: 9222
+        reversePath: /ws
+        reconnectInterval: 3000
+  '2994675625':
+    cacheImage: false
+    cacheRecord: false
+    heartbeat:
+      # 是否发送心跳包, 默认为否
+      enable: false
+      # 心跳包发送间隔, 默认为 15000毫秒
+      interval: 15000
+    http:
+      postUrl: "http://127.0.0.1:5003"
+      postMessageFormat: string
+      secret: ""
+    ws_reverse:
+      - enable: false
+        postMessageFormat: string
+        reverseHost: 127.0.0.1
+        reversePort: 8080
+        reversePath: /ws
+        reconnectInterval: 3000
+      - enable: false
+        postMessageFormat: string
+        reverseHost: 127.0.0.1
+        reversePort: 9222
+        reversePath: /ws
+        reconnectInterval: 3000

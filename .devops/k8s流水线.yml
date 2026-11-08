@@ -1,0 +1,60 @@
+version: 2
+name: k8s流水线
+description: ""
+global:
+  concurrent: 10
+workflow:
+  - ref: start
+    name: 开始
+    task: start
+  - ref: end
+    name: 结束
+    task: end
+    needs:
+      - shell_0
+  - ref: git_clone_0
+    name: git clone
+    task: git_clone@1.2.9
+    input:
+      username: ((username_pw.git_username))
+      password: ((username_pw.git_pw))
+      remote_url: '"https://github.com/your-name/cryptospider.git"'
+      ref: '"refs/heads/master"'
+      commit_id: '""'
+      depth: 1
+    needs:
+      - start
+  - ref: docker_image_build_0
+    name: docker镜像构建
+    task: docker_image_build@2.1.0
+    input:
+      registry_address: '"your-registry.example.com"'
+      docker_username: ((username_pw.docker_username))
+      docker_password: ((username_pw.docker_pw))
+      image_name: '"your-registry.example.com/spider"'
+      image_tag: git_clone_0.short_commit_id
+      docker_file: '"Dockerfile"'
+      docker_build_path: git_clone_0.git_path
+      build_args: '""'
+    needs:
+      - git_clone_0
+  - ref: shell_0
+    name: shell
+    image: docker.io/fosundragon/debanwithcurl:v1
+    env:
+      EXE_PATH: git_clone_0.git_path
+      DOCKER_IMAGE_TAG: git_clone_0.short_commit_id
+    script:
+      - cd $EXE_PATH
+      - sed -i "s/spider:[^[:space:]]*/spider:$DOCKER_IMAGE_TAG/" k8s.yml
+      - 'curl -H "Authorization: Bearer
+        <K8S_API_TOKEN>"
+        \'
+      - '     -H "Content-Type: application/yaml" \'
+      - "     -X PUT \\"
+      - '     --data-binary "@k8s.yml" \'
+      - "     https://example.com/k8sapi/apis/apps/v1/namespaces/d\
+        efault/deployments/spiders"
+    needs:
+      - docker_image_build_0
+

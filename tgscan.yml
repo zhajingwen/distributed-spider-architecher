@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tgscan
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tgscan
+  template:
+    metadata:
+      labels:
+        app: tgscan
+    spec:
+      imagePullSecrets:
+        - name: registry-secret
+      containers:
+        - name: tg-message
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "monitor.tgmessage"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+#        - name: tgscan-fuemosi
+#          image: your-registry.example.com/spider:latest
+#          command:
+#            - "python"
+#            - "manage.py"
+#            - "-e"
+#            - "prod"
+#            - "-s"
+#            - "tgscan.fuemosi"
+#          env:
+#            - name: mainex_logs_spider
+#              value: "stdout"

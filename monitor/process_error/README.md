@@ -1,0 +1,4 @@
+- `process_dead.py`  监控进程有没有异常挂掉
+- `process_stuck.py`  监控进程有没有夯住
+- `alllogs.py`  监控进程有没有异常报错
+- `gen_processesname_toredis.py` 将进程的名字录入redis

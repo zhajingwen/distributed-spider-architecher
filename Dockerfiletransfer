@@ -1,0 +1,6 @@
+FROM your-registry.example.com/spider:latest
+ENV TZ=Asia/Shanghai
+# 确保基础镜像不含有代码，否则无法更新
+COPY requirements.txt /spider/requirements.txt
+WORKDIR /spider
+RUN pip install --upgrade pip && pip install -r requirements.txt && pip install --upgrade httpx && pip install --upgrade ccxt && rm requirements.txt

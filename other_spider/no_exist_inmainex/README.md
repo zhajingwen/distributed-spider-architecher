@@ -1,0 +1,1 @@
+采集未上线mainex交易所,在cmc和coingecko上交易量大约1M的代币

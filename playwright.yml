@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playwright
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playwright
+  template:
+    metadata:
+      labels:
+        app: playwright
+    spec:
+      imagePullSecrets:
+        - name: registry-secret
+      containers:
+        - name: brc20-unisat-playwright
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "brc20.unisat_playwright"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "500Mi"
+        - name: googletrends
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "googletrends.webkit"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "500Mi"
+        - name: coingecko-once-mainexallcoins
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.mainexallcoins"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "500Mi"
+        - name: geniidata
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "geniidata.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "500Mi"
+        - name: runes
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "runes.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "1000Mi"
+            requests:
+              memory: "500Mi"
+#        - name: coingecko-gate-newcoinslist
+#          image: your-registry.example.com/spider:latest
+#          command:
+#            - "python"
+#            - "manage.py"
+#            - "-e"
+#            - "prod"
+#            - "-s"
+#            - "coingecko_once.gateplaywright"
+#          env:
+#            - name: mainex_logs_spider
+#              value: "stdout"
+#          resources:
+#            limits:
+#              memory: "1000Mi"
+#            requests:
+#              memory: "500Mi"

@@ -1,0 +1,182 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spiders-once
+spec:
+  template:
+    spec:
+      containers:
+        - name: coingecko-once-mexcmatch
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.mexc"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-once-mexctradeinfo
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.mexctradeinfo"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-once-mainexmatchandinitial
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.mainexmatch"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-once-mainextradeinfo
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.mainextradeinfo"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-gate-match
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.gatematch"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-gate-tradeinfo
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.gatetradeinfo"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-gate-listingrefresh
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.gaterefresh"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: coingecko-gate-once
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "prod"
+            - "-s"
+            - "coingecko_once.gateonce"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: categories-hothistoryvol
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "test"
+            - "-s"
+            - "hot_category.history"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: no-exist-inmainex
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "test"
+            - "-s"
+            - "no_exist_inmainex.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+        - name: mainex-marketpercent-bot
+          image: your-registry.example.com/spider:latest
+          command:
+            - "python"
+            - "manage.py"
+            - "-e"
+            - "test"
+            - "-s"
+            - "mainex_marketpercent_bot.run"
+          env:
+            - name: mainex_logs_spider
+              value: "stdout"
+          resources:
+            limits:
+              memory: "200Mi"
+            requests:
+              memory: "100Mi"
+      restartPolicy: Never
+#          - name: debank-robot
+#          image: your-registry.example.com/spider:latest
+#          command:
+#            - "python"
+#            - "manage.py"
+#            - "-e"
+#            - "prod"
+#            - "-s"
+#            - "wallet_balance.run"
+#          env:
+#            - name: mainex_logs_spider
+#              value: "stdout"
+#        - name: categories-hot
+#          image: your-registry.example.com/spider:latest
+#          command:
+#            - "python"
+#            - "manage.py"
+#            - "-e"
+#            - "test"
+#            - "-s"
+#            - "hot_category.run"
+#          env:
+#            - name: mainex_logs_spider
+#              value: "stdout"
+#        - name: cmc-m3
+#          image: your-registry.example.com/spider:latest
+#          command:
+#            - "python"
+#            - "manage.py"
+#            - "-e"
+#            - "prod"
+#            - "-s"
+#            - "cmc.m3"
+#          env:
+#            - name: mainex_logs_spider
+#              value: "stdout"

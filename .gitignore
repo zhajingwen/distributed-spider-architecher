@@ -1,0 +1,97 @@
+# ---> Python
+# Byte-compiled / optimized / DLL files
+.idea
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+.idea/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit daren_connect / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# media
+*.wav
+*.mp3
+*.mp4
+*.icon
+*.ico
+*.gif
+misc.xml
+
+# test
+test/
+*.csv
+*.pdf
+.DS_Store
+# ---> Secrets / local data (never commit)
+.venv/
+.env
+.env.*
+!.env.example
+*.session
+*.session-journal
+.claude/
+device.json
+**/ips/proxyurl
+**/ips/ips-data_center
+*.xlsx
+data.json
+origin
+allcoins_ck
+Running
+
+# ---> 第三方大文件（按 README 自行下载）
+*.jar
+!**/gradle/wrapper/gradle-wrapper.jar

@@ -1,0 +1,9 @@
+# FROM python:3.9-slim-bullseye
+FROM your-registry.example.com/spiderpy:googletrends
+# 确保基础镜像不含有代码，否则无法更新
+MAINTAINER cryptospider
+ENV PATH /usr/local/bin:$PATH
+ENV TZ=Asia/Shanghai
+ADD . /spider
+WORKDIR /spider
+RUN pip install --upgrade pip && pip install -r requirements.txt

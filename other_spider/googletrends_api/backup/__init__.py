@@ -1,0 +1,1 @@
+from .relatedsearches import Search
